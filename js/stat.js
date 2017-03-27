@@ -13,13 +13,11 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 120, 72);
 
   var max = -1;
-  var maxIndex = -1;
 
   for (var i = 0 ; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
       max = time;
-      maxIndex = i;
     }
   }
 
@@ -37,19 +35,16 @@ window.renderStatistics = function (ctx, names, times) {
     var color;
     if (name === 'Вы') {
       color = 'rgba(255, 0, 0, 1)';
-    }
-      else {
+    } else {
       color = 'rgba(0, 0, 255,' + alpha + ')';
     }
     return color;
   }
 
-  ctx.textBaseline = 'top'; // положение надписи от левого верхнего угла
-  for(var i = 0; i < times.length; i++) {
-    ctx.fillStyle = getColor(names[i]);
-    ctx.fillRect(initialX + (barWidth + indent) * i, initialY, barWidth, -1 * times[i] * step);
-    ctx.fillStyle = 'black';
-    ctx.fillText(names[i], initialX + (barWidth + indent) * i, initialY + textMarginTop);
-    ctx.fillText(times[i].toFixed(0), initialX + (barWidth + indent) * i, (initialY - (times[i] * step + 3 * textMarginTop)));
-  }
+  ctx.textBaseline = 'top';
+  ctx.fillStyle = getColor(names[i]);
+  ctx.fillRect(initialX + (barWidth + indent) * i, initialY, barWidth, -1 * times[i] * step);
+  ctx.fillStyle = 'black';
+  ctx.fillText(names[i], initialX + (barWidth + indent) * i, initialY + textMarginTop);
+  ctx.fillText(times[i].toFixed(0), initialX + (barWidth + indent) * i, (initialY - (times[i] * step + 3 * textMarginTop)));
 };
