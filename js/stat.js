@@ -13,7 +13,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 120, 46);
 
   var max = -1;
-  var time = -1;
   var histogramHeight = 150;
   var barWidth = 40;   // px;
   var indent = 50;     // px;
@@ -42,7 +41,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   var step = histogramHeight / max;
 
-  for(var i = 0; i < times.length; i++) {
+  for (var i = 0; i < times.length; i++) {
 
     var columnHeight = -1 * times[i] * step;
 
