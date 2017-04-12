@@ -9,6 +9,8 @@
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === 27) {
       closePopup();
+      setup.style.top = '';
+      setup.style.left = '';
     }
   };
 
@@ -34,11 +36,15 @@
 
   setupClose.addEventListener('click', function () {
     closePopup();
+    setup.style.top = '';
+    setup.style.left = '';
   });
 
   setupClose.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 13) {
       closePopup();
+      setup.style.top = '';
+      setup.style.left = '';
     }
   });
 
