@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+window.setup = (function () {
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
@@ -67,8 +67,7 @@
 
 
   function getRandom(random) {
-    var rand = Math.floor(Math.random() * random.length);
-    return rand;
+    return Math.floor(Math.random() * random.length);
   }
 
   var wizards = [
@@ -112,51 +111,21 @@
   userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
   var wizard = document.querySelector('.wizard');
-  var wizardCoat = wizard.querySelector('.wizard-coat');
-  var wizardEyes = wizard.querySelector('.wizard-eyes');
-  var wizardFireBall = document.querySelector('.setup-fireball-wrap');
-  var colorIndex = 0;
-  var color;
+  var coat = wizard.querySelector('.wizard-coat');
+  var eyes = wizard.querySelector('.wizard-eyes');
+  var fireBall = document.querySelector('.setup-fireball-wrap');
 
-  function getIndex(bank) {
-    if (colorIndex >= bank.length - 1) {
-      colorIndex = 0;
-    }
-    colorIndex++;
-  }
+  var colorizeCoat = function (color) {
+    coat.style.fill = color;
+  };
+  var colorizeEyes = function (color) {
+    eyes.style.fill = color;
+  };
+  var colorizeFireBall = function (color) {
+    fireBall.style.backgroundColor = color;
+  };
 
-  function getColor(bank, index) {
-    color = bank[index];
-    return color;
-  }
-
-  function changeCoatColor(coat) {
-    wizardCoat.style.fill = coat;
-  }
-
-  function changeEyesColor(eyes) {
-    wizardEyes.style.fill = eyes;
-  }
-
-  function changeFireBallColor(fireB) {
-    wizardFireBall.style.background = fireB;
-  }
-
-  wizardCoat.addEventListener('click', function () {
-    getIndex(coatColorBank);
-    getColor(coatColorBank, colorIndex);
-    changeCoatColor(color);
-  });
-
-  wizardEyes.addEventListener('click', function () {
-    getIndex(eyeColorBank);
-    getColor(eyeColorBank, colorIndex);
-    changeEyesColor(color);
-  });
-
-  wizardFireBall.addEventListener('click', function () {
-    getIndex(fireBallColorBank);
-    getColor(fireBallColorBank, colorIndex);
-    changeFireBallColor(color);
-  });
+  window.colorizeElement(coat, coatColorBank, colorizeCoat);
+  window.colorizeElement(eyes, eyeColorBank, colorizeEyes);
+  window.colorizeElement(fireBall, fireBallColorBank, colorizeFireBall);
 })();
