@@ -8,7 +8,7 @@ window.colorizeElement = (function (element, elementBank, callback) {
   };
   element.addEventListener('click', function () {
     var color = elementBank[colorIndex];
-    callback(color);
+    callback(element, color);
     colorIndex++;
     getIndex();
   });
