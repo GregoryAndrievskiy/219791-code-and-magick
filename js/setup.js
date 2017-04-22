@@ -99,7 +99,7 @@ window.setup = (function () {
     }));
   };
 
-  var debouncedUpdate = window.debounce(updateWizards, delay, false);
+  var debouncedUpdate = window.debounce(updateWizards, delay);
 
   var colorizeCoat = function (element, color) {
     element.style.fill = color;
