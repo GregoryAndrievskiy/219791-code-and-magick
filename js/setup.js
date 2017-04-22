@@ -64,14 +64,7 @@ window.setup = (function () {
   var wizards = [];
   var currentCoatColor;
   var currentEyesColor;
-  var lastTimeout;
-
-  var debounce = function (func) {
-    if (lastTimeout) {
-      window.clearTimeout(lastTimeout);
-    }
-    lastTimeout = window.setTimeout(func, 500);
-  };
+  var delay = 500;
 
   var getRank = function (wizardArray) {
     var rank = 0;
@@ -96,22 +89,6 @@ window.setup = (function () {
     }
   };
 
-  var colorizeCoat = function (element, color) {
-    element.style.fill = color;
-    currentCoatColor = color;
-    return currentCoatColor;
-  };
-
-  var colorizeEyes = function (element, color) {
-    element.style.fill = color;
-    currentEyesColor = color;
-    return currentEyesColor;
-  };
-
-  var colorizeFireBall = function (element, color) {
-    element.style.backgroundColor = color;
-  };
-
   var updateWizards = function () {
     window.render(wizards.sort(function (left, right) {
       var rankDiff = getRank(right) - getRank(left);
@@ -122,8 +99,28 @@ window.setup = (function () {
     }));
   };
 
-  window.colorizeElement(coat, coatColorBank, colorizeCoat, updateWizards, debounce);
-  window.colorizeElement(eyes, eyeColorBank, colorizeEyes, updateWizards, debounce);
+  var debouncedUpdate = window.debounce(updateWizards, delay, false);
+
+  var colorizeCoat = function (element, color) {
+    element.style.fill = color;
+    currentCoatColor = color;
+    debouncedUpdate();
+    return currentCoatColor;
+  };
+
+  var colorizeEyes = function (element, color) {
+    element.style.fill = color;
+    currentEyesColor = color;
+    debouncedUpdate();
+    return currentEyesColor;
+  };
+
+  var colorizeFireBall = function (element, color) {
+    element.style.backgroundColor = color;
+  };
+
+  window.colorizeElement(coat, coatColorBank, colorizeCoat);
+  window.colorizeElement(eyes, eyeColorBank, colorizeEyes);
   window.colorizeElement(fireBall, fireBallColorBank, colorizeFireBall);
 
   var onLoad = function (data) {
