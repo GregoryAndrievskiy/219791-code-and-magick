@@ -1,4 +1,5 @@
 'use strict';
+
 window.colorizeElement = (function (element, elementBank, callback) {
   var colorIndex = 1;
   var getIndex = function () {
