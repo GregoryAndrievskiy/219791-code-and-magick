@@ -5,7 +5,7 @@ window.debounce = function (func, wait) {
   return function () {
     var later = function () {
       timeout = null;
-      func.apply();
+      func();
     };
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);

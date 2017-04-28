@@ -15,6 +15,7 @@ window.setup = (function () {
   var openPopup = function () {
     setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
+    window.avatar();
   };
 
   var closePopup = function () {
